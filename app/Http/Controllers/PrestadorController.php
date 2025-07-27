@@ -22,6 +22,11 @@ class PrestadorController extends Controller
         return response()->json($prestador);
     }
 
+    public function search_prestador_with_afiliados($req){
+        $prestador = Prestador::get_prestador_with_afiliados($req);
+        return response()->json($prestador);
+    }
+
     public function search_prestador_by_enc($req){
         $prestador = Prestador::get_prestador_by_enc($req);
         return response()->json($prestador);

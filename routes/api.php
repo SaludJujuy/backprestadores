@@ -29,6 +29,7 @@ Route::get('/prestador',[PrestadorController::class,'list_prestadores']);
 Route::post('/prestador/search/{search}',[PrestadorController::class,'search_prestador']);
 Route::post('/prestador/search/one/{search}',[PrestadorController::class,'search_one_prestador']);
 Route::get('/prestador/searchos/{search}',[PrestadorController::class,'search_prestador_by_os']);
+Route::post('/prestador/searchaf/{search}',[PrestadorController::class,'search_prestador_with_afiliados']);
 
 Route::get('/prestador/exportall/',[PrestadorController::class,'export_all_prestador']);
 Route::get('/prestador/export/{search}',[PrestadorController::class,'export_prestador_by_param']);

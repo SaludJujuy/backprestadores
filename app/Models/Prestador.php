@@ -121,5 +121,14 @@ class Prestador extends Model
         return $result;
     }
 
-
+    public static function get_prestador_with_afiliados($req){
+        $result = DB::connection('xeilon')
+            ->table('receta')
+            ->select(
+                '*'
+            )
+            ->where('IdPrestador', $req)
+            ->get();
+        return $result;
+    }
 }
