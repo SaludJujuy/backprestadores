@@ -61,21 +61,6 @@ class CtaCteController extends Controller
                 $ctacte[$i]['total']
             ], ';'); //linea vacia
         }
-/*
-        foreach($ctacte as $row){
-            //dd($ctacte, $handle, $row);
-            fputcsv($handle,[
-                $row->Periodo,
-                $row->honorarios,
-                $row->ivahonorarios,
-                $row->gastos,
-                $row->ivagastos,
-                $row->medicamentos,
-                $row->ivamedicamentos,
-                $row->total
-            ],';');
-        }
-*/
         //linea vacias para separar
         fclose($handle);
         return response()->download($fileName)->deleteFileAfterSend(true);

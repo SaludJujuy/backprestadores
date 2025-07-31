@@ -33,6 +33,7 @@ Route::post('/prestador/searchaf/{search}',[PrestadorController::class,'search_p
 
 Route::get('/prestador/exportall/',[PrestadorController::class,'export_all_prestador']);
 Route::get('/prestador/export/{search}',[PrestadorController::class,'export_prestador_by_param']);
+Route::get('/prestador/exportaf/{search}',[PrestadorController::class,'export_afiliados_by_prestador']);
 
 Route::get('/cuenta/{req}',[CtaCteController::class,'list_ctacte_prestador']);
 Route::get('/cuenta/search/{req}/{periodo}',[CtaCteController::class,'search_ctacte_prestador']);

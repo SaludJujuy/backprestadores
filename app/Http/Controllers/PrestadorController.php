@@ -111,4 +111,38 @@ class PrestadorController extends Controller
 
         return response()->download($fileName)->deleteFileAfterSend(true);
     }
+
+    public function export_afiliados_by_prestador($req){
+        $fileName = "afiliados_prestador.csv";
+        $prestador = Prestador::get_one_prestador($req);
+        $afiliados = Prestador::get_prestador_with_afiliados($req);
+        //abrir archivo para escritura
+        $handle = fopen($fileName, 'w');
+        fwrite($handle, "\xEF\xBB\xBF"); // BOM para Excel
+
+        //cabecera de datos del prestador
+        fputcsv($handle, ['Nombre', 'CUIT_CUIL', 'NroPrestador'], ';');
+        fputcsv($handle, [
+            $prestador[0]->Nombre,
+            $prestador[0]->CUIT_CUIL,
+            $prestador[0]->NroPrestador
+        ], ';');
+
+        //cabecera de datos de los afiliados
+        fputcsv($handle, ['Numero', 'IdAfiliado', 'NroAfiliado', 'NombreAfiliado','NombrePlan', 'FechaEmision'], ';');
+
+        foreach ($afiliados as $afiliado) {
+            fputcsv($handle, [
+                $afiliado->Numero,
+                $afiliado->IdAfiliado,
+                $afiliado->NroAfiliado,
+                $afiliado->NombreAfiliado,
+                $afiliado->NombrePlan,
+                $afiliado->FechaEmision
+            ], ';');
+        }
+
+        fclose($handle);
+        return response()->download($fileName)->deleteFileAfterSend(true);
+    }
 }

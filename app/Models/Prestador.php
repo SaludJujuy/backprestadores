@@ -123,11 +123,23 @@ class Prestador extends Model
 
     public static function get_prestador_with_afiliados($req){
         $result = DB::connection('xeilon')
-            ->table('receta')
+            ->table('receta as r')
             ->select(
-                '*'
+                'r.IdReceta',
+                'r.IdPrestador',
+                'r.IdAfiliado',
+                'r.IdPlanes',
+                'r.Numero',
+                'r.CodigoBarras',
+                'r.FechaEmision',
+                'r.NroModulo',
+                'r.NroAfiliado',
+                'r.NombreAfiliado',
+                'r.idMensaje',
+                'p.NombrePlan'
             )
-            ->where('IdPrestador', $req)
+            ->leftJoin('planes as p','p.IdPlanes','=','r.IdPlanes')
+            ->where('r.IdPrestador', $req)
             ->get();
         return $result;
     }
